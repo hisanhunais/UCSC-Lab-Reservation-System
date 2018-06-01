@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
-const Book = require('../models/book');
+const Video = require('../models/video');
 
 //const db = "mongodb://hisan:Sacrificer1!@ds221339.mlab.com:21339/videoplayer";
 const db = "mongodb://localhost:27017/library";
@@ -15,58 +15,50 @@ mongoose.connect(db, function(err){
     }
 });
 
-router.get('/', function(req,res){
-    res.send('api works');
-})
-
-router.get('/books', function(req, res){
-    console.log("Get request for all books");
-    Book.find({})
-    .exec(function(err, books){
+router.get('/videos', function(req, res){
+    console.log("Get request for all videos");
+    Video.find({})
+    .exec(function(err, videos){
         if(err)
         {
-            console.log("Error retrieving books");
+            console.log("Error retrieving videos");
         }
         else
         {
-            res.json(books);
+            res.json(videos);
         }
     });
 });
 
-router.get('/books/:id', function(req, res){
-    console.log("Get request for a single book");
-    Book.findById(req.params.id)
-    .exec(function(err, book){
+router.get('/videos/:id', function(req, res){
+    console.log("Get request for a single video");
+    Video.findById(req.params.id)
+    .exec(function(err, video){
         if(err)
         {
-            console.log("Error retrieving book");
+            console.log("Error retrieving video");
         }
         else
         {
-            res.json(book);
+            res.json(video);
         }
     });
 });
 
-router.post('/book', function(req, res){
-    console.log("Post a Book");
-    var newBook = new Book();
-    newBook.isbn = req.body.isbn;
-    newBook.name = req.body.name;
-    newBook.category = req.body.category;
-    newBook.author = req.body.author;
-    newBook.publisher = req.body.publisher;
-    newBook.edition = req.body.edition;
-    newBook.noOfCopies = req.body.noOfCopies;
-    newBook.save(function(err, insertedBook){
+router.post('/video', function(req, res){
+    console.log("Post a Video");
+    var newVideo = new Video();
+    newVideo.title = req.body.title;
+    newVideo.url = req.body.url;
+    newVideo.description = req.body.description;
+    newVideo.save(function(err, insertedVideo){
         if(err)
         {
-            console.log("Error saving book");
+            console.log("Error saving video");
         }
         else
         {
-            res.json(insertedBook);
+            res.json(insertedVideo);
         }
     });
 });
