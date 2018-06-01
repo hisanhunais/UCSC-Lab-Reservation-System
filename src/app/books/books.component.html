@@ -5,19 +5,24 @@
         <span class="glyphicon glyphicon-plus-sign"> Add
       </button> -->
       <br><br>
-      <table class="table table-bordered" id="item_table">
+      <table class="table table-bordered" id="item_table" >
         <thead>
           <tr>
-            <td width="20%">Name</td>
-            <td width="40%">Description</td>
+            <td width="20%">ISBN</td>
+            <td width="40%">Name</td>
             <td width="10%">Price (Rs)</td>
             <td width="10%">Image</td>
             <td width="10%"></td>
             <td width="10%"></td>
           </tr>
         </thead>
-        <tbody>
-        
+        <tbody *ngFor="let book of books">
+          <td width="20%">{{book.isbn}}</td>
+          <td width="40%">{{book.name}}</td>
+          <td width="10%">Price (Rs)</td>
+          <td width="10%">Image</td>
+          <td width="10%"></td>
+          <td width="10%"></td>
         </tbody>
       </table>
     </div>
